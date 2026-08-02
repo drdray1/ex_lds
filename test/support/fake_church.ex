@@ -86,7 +86,7 @@ defmodule ExLds.FakeChurch do
   # Birthday report — bearer + unit gated.
   defp route("lcr.churchofjesuschrist.org", "/api/report/birthday-list/unit/" <> _rest, conn) do
     if bearer(conn) == "bearer-token-xyz" do
-      json(conn, 200, %{"8" => [%{"name" => "Meacham, Lauryn"}]})
+      json(conn, 200, %{"8" => [%{"name" => "Fakerson, Testina"}]})
     else
       resp(conn, 401, "unauthorized")
     end
@@ -98,20 +98,20 @@ defmodule ExLds.FakeChurch do
     [
       %{
         "personUuid" => "uuid-1",
-        "nameGivenPreferredLocal" => "Lauryn",
-        "nameFamilyPreferredLocal" => "Meacham",
-        "phoneNumber" => "8016823316",
+        "nameGivenPreferredLocal" => "Testina",
+        "nameFamilyPreferredLocal" => "Fakerson",
+        "phoneNumber" => "5555550101",
         "birth" => %{
           "date" => %{"date" => "1999-08-02"},
           "monthDay" => %{"date" => "0000-08-02"}
         },
-        "email" => "lauryn@example.com",
+        "email" => "testina@example.com",
         "movedOut" => nil
       },
       %{
         "personUuid" => "uuid-2",
-        "nameListPreferredLocal" => "Alvarez, Ammon",
-        "phones" => [%{"number" => "3035949703"}],
+        "nameListPreferredLocal" => "Sample, Person",
+        "phones" => [%{"number" => "5555550102"}],
         "birth" => %{"monthDay" => %{"date" => "0000-11-05"}},
         "movedOut" => "2024-01-01"
       }

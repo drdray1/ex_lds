@@ -31,27 +31,27 @@ defmodule ExLdsTest do
     end
 
     test "returns normalized members for the home unit", %{session: session} do
-      assert {:ok, [lauryn, ammon]} = ExLds.member_list(session)
+      assert {:ok, [split_name, list_name]} = ExLds.member_list(session)
 
       assert %Member{
                person_uuid: "uuid-1",
-               first_name: "Lauryn",
-               last_name: "Meacham",
-               phone: "8016823316",
+               first_name: "Testina",
+               last_name: "Fakerson",
+               phone: "5555550101",
                birthday: ~D[1999-08-02],
                birth_month: 8,
                birth_day: 2,
-               email: "lauryn@example.com",
+               email: "testina@example.com",
                moved_out: false
-             } = lauryn
+             } = split_name
 
       # "Last, First" fallback + phones[] fallback + year-less birthday + moved-out.
-      assert ammon.first_name == "Ammon"
-      assert ammon.last_name == "Alvarez"
-      assert ammon.phone == "3035949703"
-      assert ammon.birthday == nil
-      assert {ammon.birth_month, ammon.birth_day} == {11, 5}
-      assert ammon.moved_out == true
+      assert list_name.first_name == "Person"
+      assert list_name.last_name == "Sample"
+      assert list_name.phone == "5555550102"
+      assert list_name.birthday == nil
+      assert {list_name.birth_month, list_name.birth_day} == {11, 5}
+      assert list_name.moved_out == true
     end
 
     test "an explicit unit with no data returns an empty list", %{session: session} do
@@ -59,7 +59,7 @@ defmodule ExLdsTest do
     end
 
     test "birthdays/2 returns the raw report and user/1 exposes the profile", %{session: session} do
-      assert {:ok, %{"8" => [%{"name" => "Meacham, Lauryn"}]}} = ExLds.birthdays(session)
+      assert {:ok, %{"8" => [%{"name" => "Fakerson, Testina"}]}} = ExLds.birthdays(session)
       assert ExLds.user(session)["individualId"] == 42
     end
 
